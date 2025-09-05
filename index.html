@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Real Estate Portfolio Flipbook</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/turn.js"></script>
+    <style>
+      body {
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+      #flipbook-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+      #flipbook .page {
+        background: white;
+      }
+      #flipbook .page img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .flipbook-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+        z-index: 10;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .prev-btn {
+        left: 20px;
+      }
+      .next-btn {
+        right: 20px;
+      }
+      @media (max-width: 768px) {
+        .flipbook-nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="flipbook-container">
+      <span class="flipbook-nav prev-btn">◀️</span>
+      <div id="flipbook">
+        <div class="page"><img src="re_port/Slide1.JPG" alt="Page 1" /></div>
+        <div class="page"><img src="re_port/Slide2.JPG" alt="Page 2" /></div>
+        <div class="page"><img src="re_port/Slide3.JPG" alt="Page 3" /></div>
+        <div class="page"><img src="re_port/Slide4.JPG" alt="Page 4" /></div>
+        <div class="page"><img src="re_port/Slide5.JPG" alt="Page 5" /></div>
+        <div class="page"><img src="re_port/Slide6.JPG" alt="Page 6" /></div>
+        <div class="page"><img src="re_port/Slide7.JPG" alt="Page 7" /></div>
+        <div class="page"><img src="re_port/Slide8.JPG" alt="Page 8" /></div>
+        <div class="page"><img src="re_port/Slide9.JPG" alt="Page 9" /></div>
+        <div class="page"><img src="re_port/Slide10.JPG" alt="Page 10" /></div>
+        <div class="page"><img src="re_port/Slide11.JPG" alt="Page 11" /></div>
+        <div class="page"><img src="re_port/Slide12.JPG" alt="Page 12" /></div>
+        <div class="page"><img src="re_port/Slide13.JPG" alt="Page 13" /></div>
+        <div class="page"><img src="re_port/Slide14.JPG" alt="Page 14" /></div>
+        <div class="page"><img src="re_port/Slide15.JPG" alt="Page 15" /></div>
+        <div class="page"><img src="re_port/Slide16.JPG" alt="Page 16" /></div>
+        <div class="page"><img src="re_port/Slide17.JPG" alt="Page 17" /></div>
+        <div class="page"></div>
+      </div>
+      <span class="flipbook-nav next-btn">▶️</span>
+    </div>
+
+    <script>
+      function resizeFlipbook() {
+        var container = $("#flipbook-container");
+        var width = container.width();
+        var height = container.height();
+
+        var bookAspectRatio = 1200 / 800;
+        var containerAspectRatio = width / height;
+
+        var bookWidth, bookHeight;
+
+        if (containerAspectRatio > bookAspectRatio) {
+          bookHeight = height;
+          bookWidth = height * bookAspectRatio;
+        } else {
+          bookWidth = width;
+          bookHeight = width / bookAspectRatio;
+        }
+
+        $("#flipbook").turn("size", bookWidth, bookHeight);
+      }
+
+      $(window).on("load", function () {
+        $("#flipbook").turn({
+          width: 1200,
+          height: 800,
+          autoCenter: true,
+          display: "double",
+        });
+
+        resizeFlipbook();
+
+        $(".prev-btn").on("click", function () {
+          $("#flipbook").turn("previous");
+        });
+
+        $(".next-btn").on("click", function () {
+          $("#flipbook").turn("next");
+        });
+      });
+
+      $(window).resize(function () {
+        resizeFlipbook();
+      });
+    </script>
+  </body>
+</html>
